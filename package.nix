@@ -1,10 +1,18 @@
 { stdenvNoCC }: stdenvNoCC.mkDerivation {
-    name = "mos-sddm-theme";
+    pname = "mos-sddm-theme";
     version = "0.1";
 
     src = ./.;
+
+    dontConfigure = true;
+    dontBuild = true;
+
     installPhase = ''
-        mkdir -p $out
-        cp -R ./* $out/
+      runHook preInstall
+
+      mkdir -p "$out/share/sddm/themes/"
+      cp -r catppuccin/ "$out/share/sddm/themes/mos-sddm-theme"
+
+      runHook postInstall
     '';
 }
