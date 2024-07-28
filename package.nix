@@ -1,4 +1,4 @@
-{ pkgs }: pkgs.stdenv.mkDerivation {
+{ stdenvNoCC }: stdenvNoCC.mkDerivation {
     name = "mos-sddm-theme";
     src = ./.;
     installPhase = ''
