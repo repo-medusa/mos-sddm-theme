@@ -2,15 +2,20 @@
   description = "The SDDM Theme";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    utils.url = "github:numtide/flake-utils";
+    nixpkgs.url = "nixpkgs/nixos-unstable";
+    flake-compat = { url = "github:edolstra/flake-compat"; flake = false; };
   };
 
-  outputs = { self, nixpkgs, utils, ... } @ inputs: utils.lib.eachSystem [
-    "x86_64-linux"
-  ] (system: let
-    pkgs = import nixpkgs { inherit system; };
-  in rec {
-    packages.default = pkgs.kdePackages.callPackage ./package.nix { };
-  });
+  outputs = { self, nixpkgs, ... } @ inputs:
+  let
+    forAllSystems = nixpkgs.lib.genAttrs [ "x86_64-linux" "aarch64-linux" ];
+
+    nixpkgsFor = forAllSystems (system: import nixpkgs { inherit system; });
+  in {
+    packages = forAllSystems (system: {
+      mos-sddm-theme = nixpkgsFor.${system}.kdePackages.callPackage ./package.nix {};
+    });
+
+    defaultPackage = forAllSystems (system: self.packages.${system}.mos-sddm-theme);
+  };
 }

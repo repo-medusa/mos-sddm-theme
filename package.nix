@@ -1,11 +1,8 @@
-{ stdenvNoCC }: stdenvNoCC.mkDerivation {
+{ lib, pkgs }: pkgs.stdenvNoCC.mkDerivation {
     pname = "mos-sddm-theme";
     version = "0.1";
 
     src = ./mos;
-
-    dontConfigure = true;
-    dontBuild = true;
 
     installPhase = ''
       runHook preInstall
@@ -15,4 +12,9 @@
 
       runHook postInstall
     '';
+  meta = {
+    description = "A custom SDDM theme";
+    license = lib.licenses.mit;
+    platforms = lib.platforms.linux;
+  };
 }
