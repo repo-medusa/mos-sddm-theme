@@ -13,9 +13,9 @@
     nixpkgsFor = forAllSystems (system: import nixpkgs { inherit system; });
   in {
     packages = forAllSystems (system: {
-      mos-sddm-theme = nixpkgsFor.${system}.kdePackages.callPackage ./package.nix {};
+      default = nixpkgsFor.${system}.kdePackages.callPackage ./package.nix {};
     });
 
-    defaultPackage = forAllSystems (system: self.packages.${system}.mos-sddm-theme);
+    defaultPackage = forAllSystems (system: self.packages.${system}.default);
   };
 }
