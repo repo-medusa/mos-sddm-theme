@@ -11,7 +11,7 @@
       runHook preInstall
 
       mkdir -p "$out/share/sddm/themes/mos-sddm-theme"
-      cp -r "$src/" "$out/share/sddm/themes/mos-sddm-theme"
+      cp -r * "$out/share/sddm/themes/mos-sddm-theme"
 
       runHook postInstall
     '';
