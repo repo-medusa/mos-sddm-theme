@@ -1,6 +1,6 @@
 [General]
 showlogo=hidden
-logo=${KDE_INSTALL_FULL_DATADIR}/sddm/themes/breeze/default-logo.svg
+logo=${KDE_INSTALL_FULL_DATADIR}/sddm/themes/mos-sddm-theme/default-logo.svg
 type=image
 color=#1d99f3
 fontSize=10

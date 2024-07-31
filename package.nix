@@ -2,7 +2,7 @@
     pname = "mos-sddm-theme";
     version = "0.1";
 
-    src = ./.;
+    src = ./mos;
 
     dontConfigure = true;
     dontBuild = true;
@@ -10,8 +10,8 @@
     installPhase = ''
       runHook preInstall
 
-      mkdir -p "$out/share/sddm/themes/"
-      cp -r catppuccin/ "$out/share/sddm/themes/mos-sddm-theme"
+      mkdir -p "$out/share/sddm/themes/mos-sddm-theme"
+      cp -r "$src/" "$out/share/sddm/themes/mos-sddm-theme"
 
       runHook postInstall
     '';
